@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MyApplication">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".receiver.AlarmReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.example.ACTION_TRIGGER_MISSION_ALARM" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Widget Action Broadcast Receiver -->
+        <receiver
+            android:name=".widget.WidgetActionReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.widget.ACTION_TOGGLE" />
+                <action android:name="com.example.widget.ACTION_REFRESH" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 1. Mission Progress Widget -->
+        <receiver
+            android:name=".widget.MissionProgressWidgetProvider"
+            android:exported="true"
+            android:label="Mission 10L - Progress">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_mission_progress" />
+        </receiver>
+
+        <!-- 2. Today's Mission Widget -->
+        <receiver
+            android:name=".widget.TodayMissionWidgetProvider"
+            android:exported="true"
+            android:label="Mission 10L - Today's Checklist">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_today_mission" />
+        </receiver>
+
+        <!-- 3. Streak Widget -->
+        <receiver
+            android:name=".widget.StreakWidgetProvider"
+            android:exported="true"
+            android:label="Mission 10L - Streak">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_streak" />
+        </receiver>
+
+        <!-- 4. Namaz Widget -->
+        <receiver
+            android:name=".widget.NamazWidgetProvider"
+            android:exported="true"
+            android:label="Mission 10L - Namaz Tracker">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_namaz" />
+        </receiver>
+
+        <!-- 5. CEO Dashboard Widget -->
+        <receiver
+            android:name=".widget.CeoDashboardWidgetProvider"
+            android:exported="true"
+            android:label="Mission 10L - CEO Dashboard">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_ceo_dashboard" />
+        </receiver>
+
+        <!-- 6. Content Creator Widget -->
+        <receiver
+            android:name=".widget.ContentCreatorWidgetProvider"
+            android:exported="true"
+            android:label="Mission 10L - Content Creator">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_content_creator" />
+        </receiver>
+
+        <!-- 7. Habits Widget -->
+        <receiver
+            android:name=".widget.HabitsWidgetProvider"
+            android:exported="true"
+            android:label="Mission 10L - Daily Habits">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_habits" />
+        </receiver>
+
+        <!-- 8. Daily Quote Widget -->
+        <receiver
+            android:name=".widget.DailyQuoteWidgetProvider"
+            android:exported="true"
+            android:label="Mission 10L - Daily Quote">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_daily_quote" />
+        </receiver>
+
+        <!-- 9. Financial Freedom Widget -->
+        <receiver
+            android:name=".widget.FinancialFreedomWidgetProvider"
+            android:exported="true"
+            android:label="Mission 10L - Financial Freedom">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_financial_freedom" />
+        </receiver>
+
+        <!-- 10. Vision Board Widget -->
+        <receiver
+            android:name=".widget.VisionBoardWidgetProvider"
+            android:exported="true"
+            android:label="Mission 10L - Vision Board">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_vision_board" />
+        </receiver>
+    </application>
+
+</manifest>

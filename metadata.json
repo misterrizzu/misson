@@ -1,0 +1,6 @@
+{
+  "name": "Mission 10L",
+  "description": "Offline CEO dashboard to track your goal of earning ₹10,00,000.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
