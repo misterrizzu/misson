@@ -3,48 +3,63 @@
     android:id="@+id/root_widget"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_widget_glass_red"
+    android:background="@drawable/bg_widget_premium_card"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="16dp">
 
+    <!-- Terminal Header -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="10dp">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:text="👑 CEO DASHBOARD"
-            android:textColor="#FF1744"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_gold_crown" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="CEO DASHBOARD"
+                android:textColor="@color/widget_accent_gold"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.08" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="MISSION 10L"
-            android:textColor="#888888"
+            android:text="LIVE • TERMINAL"
+            android:textColor="@color/widget_accent_green"
             android:textSize="10sp"
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <GridLayout
+    <!-- 5 KPI Cards Row -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:columnCount="2"
-        android:rowCount="2">
+        android:orientation="horizontal">
 
+        <!-- KPI 1: Revenue -->
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="3dp"
-            android:background="@drawable/bg_widget_card_glass"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_widget_secondary_card"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="6dp">
@@ -53,26 +68,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="REVENUE"
-                android:textColor="#FF8A80"
-                android:textSize="9sp" />
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="8sp" />
 
             <TextView
                 android:id="@+id/txt_ceo_rev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="₹0"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:text="₹2.45L"
+                android:textColor="@color/widget_accent_gold"
+                android:textSize="13sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
+        <!-- KPI 2: Mission % -->
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="3dp"
-            android:background="@drawable/bg_widget_card_glass"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_widget_secondary_card"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="6dp">
@@ -80,27 +96,57 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TODAY MISSION"
-                android:textColor="#FF8A80"
-                android:textSize="9sp" />
+                android:text="MISSION"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="8sp" />
 
             <TextView
                 android:id="@+id/txt_ceo_mission"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0%"
-                android:textColor="#FF1744"
-                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:text="24%"
+                android:textColor="@color/widget_accent_blue"
+                android:textSize="13sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
+        <!-- KPI 3: Today's Completion -->
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="3dp"
-            android:background="@drawable/bg_widget_card_glass"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_widget_secondary_card"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TODAY"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/txt_ceo_completion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="68%"
+                android:textColor="@color/widget_accent_green"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- KPI 4: Current Streak -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_widget_secondary_card"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="6dp">
@@ -109,26 +155,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="STREAK"
-                android:textColor="#FF8A80"
-                android:textSize="9sp" />
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="8sp" />
 
             <TextView
                 android:id="@+id/txt_ceo_streak"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0 🔥"
-                android:textColor="#FF5252"
-                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:text="23d 🔥"
+                android:textColor="@color/widget_accent_orange"
+                android:textSize="13sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
+        <!-- KPI 5: Today's Clips -->
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="3dp"
-            android:background="@drawable/bg_widget_card_glass"
+            android:layout_height="match_parent"
+            android:layout_marginStart="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_widget_secondary_card"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="6dp">
@@ -136,18 +183,44 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="HABITS"
-                android:textColor="#FF8A80"
-                android:textSize="9sp" />
+                android:text="CLIPS"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="8sp" />
 
             <TextView
-                android:id="@+id/txt_ceo_habits"
+                android:id="@+id/txt_ceo_clips"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0/0"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:text="2/2 🎬"
+                android:textColor="@color/widget_accent_purple"
+                android:textSize="13sp"
                 android:textStyle="bold" />
         </LinearLayout>
-    </GridLayout>
+    </LinearLayout>
+
+    <!-- Sparkline / Bottom Quote Row -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="★ Discipline Today. Freedom Tomorrow. ★"
+            android:textColor="@color/widget_text_secondary"
+            android:textSize="10sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="📈 Peak Growth"
+            android:textColor="@color/widget_accent_gold"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 </LinearLayout>

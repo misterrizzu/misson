@@ -3,119 +3,256 @@
     android:id="@+id/root_widget"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_widget_glass_red"
+    android:background="@drawable/bg_widget_premium_card"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="16dp">
 
-    <!-- Header -->
+    <!-- Header Row -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp">
+        android:layout_marginBottom="8dp">
 
-        <TextView
-            android:id="@+id/txt_namaz_title"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:text="🕌 5 DAILY PRAYERS"
-            android:textColor="#FF1744"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_mosque_silhouette" />
+
+            <TextView
+                android:id="@+id/txt_namaz_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="NAMAZ TIME"
+                android:textColor="@color/widget_accent_gold"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/txt_namaz_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/bg_red_pill_glow"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="3dp"
-            android:text="0/5 Completed"
-            android:textColor="#FFFFFF"
-            android:textSize="10sp"
+            android:background="@drawable/bg_widget_capsule_checked"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:text="3 / 5 Completed"
+            android:textColor="@color/widget_accent_green"
+            android:textSize="11sp"
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <!-- 5 Prayers Grid / Row -->
+    <!-- 5 Prayers Cards Row -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <TextView
+        <!-- Fajr -->
+        <LinearLayout
             android:id="@+id/chk_fajr"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="4dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_widget_item_unchecked"
+            android:background="@drawable/bg_widget_capsule_checked"
             android:gravity="center"
-            android:paddingVertical="8dp"
-            android:text="☐\nFajr"
-            android:textColor="#FFFFFF"
-            android:textSize="10sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:padding="6dp">
 
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FAJR"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="05:15 AM"
+                android:textColor="@color/widget_text_primary"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="✔"
+                android:textColor="@color/widget_accent_green"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Dhuhr -->
+        <LinearLayout
             android:id="@+id/chk_dhuhr"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="2dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_widget_item_unchecked"
+            android:background="@drawable/bg_widget_capsule_checked"
             android:gravity="center"
-            android:paddingVertical="8dp"
-            android:text="☐\nDhuhr"
-            android:textColor="#FFFFFF"
-            android:textSize="10sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:padding="6dp">
 
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DHUHR"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01:30 PM"
+                android:textColor="@color/widget_text_primary"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="✔"
+                android:textColor="@color/widget_accent_green"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Asr (Active Glow) -->
+        <LinearLayout
             android:id="@+id/chk_asr"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_widget_item_unchecked"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="2dp"
+            android:layout_weight="1.2"
+            android:background="@drawable/bg_widget_capsule_checked"
             android:gravity="center"
-            android:paddingVertical="8dp"
-            android:text="☐\nAsr"
-            android:textColor="#FFFFFF"
-            android:textSize="10sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:padding="6dp">
 
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ASR"
+                android:textColor="@color/widget_accent_gold"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="04:45 PM"
+                android:textColor="@color/widget_accent_gold"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="01:45:32"
+                android:textColor="@color/widget_accent_gold"
+                android:textSize="9sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="REMAINING"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="7sp" />
+        </LinearLayout>
+
+        <!-- Maghrib -->
+        <LinearLayout
             android:id="@+id/chk_maghrib"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="2dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_widget_item_unchecked"
+            android:background="@drawable/bg_widget_capsule_unchecked"
             android:gravity="center"
-            android:paddingVertical="8dp"
-            android:text="☐\nMaghrib"
-            android:textColor="#FFFFFF"
-            android:textSize="10sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:padding="6dp">
 
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MAGHRIB"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="07:15 PM"
+                android:textColor="@color/widget_disabled"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="○"
+                android:textColor="@color/widget_disabled"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Isha -->
+        <LinearLayout
             android:id="@+id/chk_isha"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="4dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_widget_item_unchecked"
+            android:background="@drawable/bg_widget_capsule_unchecked"
             android:gravity="center"
-            android:paddingVertical="8dp"
-            android:text="☐\nIsha"
-            android:textColor="#FFFFFF"
-            android:textSize="10sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:padding="6dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ISHA"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="08:45 PM"
+                android:textColor="@color/widget_disabled"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="○"
+                android:textColor="@color/widget_disabled"
+                android:textSize="14sp" />
+        </LinearLayout>
     </LinearLayout>
+
+    <!-- Respectful Islamic Quote -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="“Don't delay the prayer, for indeed prayer prohibits immorality and wrongdoing.” (Quran 29:45)"
+        android:textColor="@color/widget_text_secondary"
+        android:textSize="10sp"
+        android:textStyle="italic" />
 </LinearLayout>

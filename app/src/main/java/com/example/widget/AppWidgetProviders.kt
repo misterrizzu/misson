@@ -63,3 +63,10 @@ class VisionBoardWidgetProvider : AppWidgetProvider() {
         WidgetDataUpdater.updateVisionBoardWidgetOnly(context)
     }
 }
+
+class LockScreenWidgetProvider : AppWidgetProvider() {
+    override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
+        WidgetDataUpdater.updateLockScreenWidgetOnly(context)
+    }
+}
+

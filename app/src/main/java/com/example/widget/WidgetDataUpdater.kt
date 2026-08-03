@@ -33,6 +33,7 @@ object WidgetDataUpdater {
                 updateDailyQuoteWidgetOnly(appContext)
                 updateFinancialWidgetOnly(appContext)
                 updateVisionBoardWidgetOnly(appContext)
+                updateLockScreenWidgetOnly(appContext)
             } catch (e: Throwable) {
                 e.printStackTrace()
             }
@@ -533,26 +534,93 @@ object WidgetDataUpdater {
         )
     }
 
-    fun createRingBitmap(progressPct: Float, widthPx: Int = 100, heightPx: Int = 100, ringColorHex: Int = Color.parseColor("#FF1744")): Bitmap {
+    fun updateLockScreenWidgetOnly(context: Context) {
+        try {
+            val appWidgetManager = AppWidgetManager.getInstance(context)
+            val compName = ComponentName(context, LockScreenWidgetProvider::class.java)
+            val widgetIds = appWidgetManager.getAppWidgetIds(compName)
+            if (widgetIds == null || widgetIds.isEmpty()) return
+
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val db = AppDatabase.getDatabase(context)
+                    val dao = db.missionDao()
+                    val todayStr = getTodayString()
+                    val allRevenues = dao.getAllRevenueSync()
+                    val totalRev = allRevenues.sumOf { it.amount }
+                    val mission = dao.getTodayMissionSync(todayStr) ?: DayMissionEntity(date = todayStr)
+                    val allMissions = dao.getAllDayMissionsSync()
+                    val streak = calculateStreak(allMissions)
+
+                    val pct = ((totalRev / 1000000.0) * 100.0).coerceIn(0.0, 100.0).toFloat()
+                    val formattedRev = String.format("₹%,.0f", totalRev)
+                    val nextTask = when {
+                        !mission.boxablClipPosted -> "Next: 🎬 Boxabl Clip"
+                        !mission.cantinaClipPosted -> "Next: 🎬 Cantina Clip"
+                        !mission.namaz5Prayers -> "Next: 🕌 Namaz"
+                        !mission.workout -> "Next: 💪 Workout"
+                        else -> "All Tasks Complete! 🎉"
+                    }
+
+                    for (id in widgetIds) {
+                        val views = RemoteViews(context.packageName, R.layout.widget_lock_screen)
+                        views.setTextViewText(R.id.txt_lock_pct, String.format("%.0f%%", pct))
+                        views.setTextViewText(R.id.txt_lock_rev, formattedRev)
+                        views.setTextViewText(R.id.txt_lock_streak, "🔥 ${streak}d")
+                        views.setTextViewText(R.id.txt_lock_next_task, nextTask)
+                        views.setOnClickPendingIntent(R.id.root_widget, createOpenAppIntent(context, "home"))
+                        appWidgetManager.updateAppWidget(id, views)
+                    }
+                } catch (e: Throwable) {
+                    e.printStackTrace()
+                }
+            }
+        } catch (e: Throwable) {
+            e.printStackTrace()
+        }
+    }
+
+    fun createRingBitmap(
+        progressPct: Float,
+        widthPx: Int = 120,
+        heightPx: Int = 120,
+        ringColorHex: Int = Color.parseColor("#F5C451")
+    ): Bitmap {
         val bitmap = Bitmap.createBitmap(widthPx, heightPx, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
 
-        val strokeWidth = widthPx * 0.12f
+        // 18dp thickness proportional scaling
+        val strokeWidth = widthPx * 0.15f
         val padding = strokeWidth / 2f + 4f
         val rectF = RectF(padding, padding, widthPx - padding, heightPx - padding)
 
+        // Background Ring #2A2A2A
         val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             style = Paint.Style.STROKE
-            color = Color.parseColor("#331010")
+            color = Color.parseColor("#2A2A2A")
             this.strokeWidth = strokeWidth
             strokeCap = Paint.Cap.ROUND
         }
 
+        // Foreground Accent Ring
         val fgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             style = Paint.Style.STROKE
             color = ringColorHex
             this.strokeWidth = strokeWidth
             strokeCap = Paint.Cap.ROUND
+        }
+
+        // Glow effect on milestone (e.g. >= 25%, 50%, 75%, 100%)
+        if (progressPct >= 25f) {
+            val glowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                style = Paint.Style.STROKE
+                color = ringColorHex
+                this.strokeWidth = strokeWidth + 4f
+                alpha = 60
+                strokeCap = Paint.Cap.ROUND
+            }
+            val sweepAngle = (progressPct / 100f).coerceIn(0f, 1f) * 360f
+            canvas.drawArc(rectF, -90f, sweepAngle, false, glowPaint)
         }
 
         canvas.drawArc(rectF, 0f, 360f, false, bgPaint)
@@ -562,3 +630,4 @@ object WidgetDataUpdater {
         return bitmap
     }
 }
+
